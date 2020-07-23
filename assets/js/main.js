@@ -76,90 +76,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /// calculator 
 
-    class GridItem {
-        constructor(id, btns, items, parent, ...classes) {
-            this.id = id;
-            this.btns = btns;
-            this.items = {...items};
-            this.parent = parent;
-            this.classes = classes;
-            this.img = parent.querySelector('.grid__item-image');
-            this.info = parent.querySelector('.grid__item-info');
-            this.createButton();
-            this.buttonListiner();
-        }
-
-        createButton () {
-            if(this.btns.length > 0 && this.btns){
-                this.btns.forEach((btn, i) => {
-                    const span = document.createElement('span');
-                    span.innerText = btn;
-                    span.dataset.id = i + 1;
-                    span.classList.add('grid__item-btn');
-                    this.parent.querySelector('.grid__item-btns').append(span);
-                });  
-            }
-        }
-
-        buttonListiner () {
-            const btns = [...this.parent.querySelectorAll('.grid__item-btn')];
-            btns.map(btn => {
-                btn.addEventListener('click', e => {
-                    const t = e.target;
-                    console.log(t);
-                    const img = document.createElement('img');
-                    this.img.innerHTML = '';
-                    img.src = this.items[t.dataset.id - 1].img;
-                    img.alt = this.items[t.dataset.id - 1].alt;
-                    img.width = "100";
-                    this.img.append(img);
-                });
-            });
-        }
-
-
-
-        render() {
-            // if(this.btns.length > 0){
-            //     this.createButton(this.btns, this.parent);
-            // }
-            const element = document.createElement('div');
-            if (this.classes.length === 0) {
-                this.classes.push('grid__item-wrapper');
-            }
-            this.classes.map(item => {
-                element.classList.add(item);
-            });
-            element.innerHTML = `
-                    <img src=${this.items[0].img} width="100" alt=${this.items[0].alt}>
-                    <h3 class="grid__item-subtitle">${this.items[0].title}</h3>
-                    <div class="grid__item-price">
-                        <div class="grid__item-cost">Цена:</div>
-                        <div class="grid__item-total"><span>${this.items[0].price}</span></div>
-                    </div>
-            `;
-            this.parent.append(element);
-        }
-    }
-
     const gridItems = [...document.querySelectorAll('.grid-item')];
 
 
-    getData('/assets/js/db.json')
-        .then( data => {
-            console.log(data.calc);
-            data.calc.forEach(item => {
-                console.log(item.btns);
-                const parent = document.querySelector(`.${item.id}`);
-                    new GridItem(
-                        item.id,
-                        item.btns,
-                        item.items,
-                        parent
-                    ).render();               
-        });
+    const router = document.querySelector('.router'),
+          imgs = [...router.querySelectorAll('img')],
+          titles = [...router.querySelectorAll('h4')],
+          btns = [...router.querySelectorAll('.grid__item-btn')],
+          total = router.querySelector('.grid__item-total span');
+
+          btns.forEach(btn => {
+              btn.addEventListener('click', e => {
+                const t = e.target;
+                spanToggler(t.dataset.id, t.dataset.price);
+                t.classList.add('active');
+              });
+          });
     
-    });
+    const spanToggler = (id, price) => {
+        imgs.forEach(img => {
+            img.style.display = id == img.dataset.id? '' : 'none';
+        });
+        titles.forEach(title => {
+            title.style.display = id == title.dataset.id? '' : 'none';
+        });
+        total.textContent = price;
+        btns.forEach(btn => {
+            btn.classList.remove('active');
+        });
+    };
+
+    console.log(routerBtns);
+
 
 });
 $(function() {

@@ -1035,12 +1035,15 @@ p {
 .sum { grid-area: sum; }
 
 .grid__item {
-  transition: all .3s;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
   position: relative;
   background: #fff;
   min-height: 170px;
   border: 1px solid #e5ebed;
   padding: 2rem 1rem;
+  transition: all .3s;
 }
 
 .grid__item:hover {
@@ -1049,7 +1052,7 @@ p {
 
 .grid__item-btns {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
@@ -1065,6 +1068,29 @@ p {
     color: #7d98a5;
     letter-spacing: .46px;
     line-height: 21px;
+    margin: 5px;
+}
+
+.grid__item-btn.active {
+  color: #e2ecf1;
+  background: #065490;
+}
+
+.grid__item-image {
+  width: 150px;
+  height: 150px;
+  text-align: center;
+}
+
+.grid__item-image img {
+  max-height: 80px;
+}
+
+.grid__item-text {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
 }
 
 
