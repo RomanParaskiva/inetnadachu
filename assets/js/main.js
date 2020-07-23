@@ -76,24 +76,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /// calculator 
 
-    const gridItems = [...document.querySelectorAll('.grid-item')];
+    const gridItems = [...document.querySelectorAll('.grid__item')];
 
+          
 
-    const router = document.querySelector('.router'),
-          imgs = [...router.querySelectorAll('img')],
-          titles = [...router.querySelectorAll('h4')],
-          btns = [...router.querySelectorAll('.grid__item-btn')],
-          total = router.querySelector('.grid__item-total span');
+    const gridItemGet = (parent) => {
+        const btns = [...parent.querySelectorAll('.grid__item-btn')];
 
-          btns.forEach(btn => {
-              btn.addEventListener('click', e => {
-                const t = e.target;
-                spanToggler(t.dataset.id, t.dataset.price);
-                t.classList.add('active');
-              });
-          });
+              if(btns && btns.length > 0) {
+                btns.forEach(btn => {
+                    btn.addEventListener('click', e => {
+                      const t = e.target;
+                      spanToggler(t.dataset.id, t.dataset.price, parent);
+                      t.classList.add('active');
+                    });
+                });
+              }
+    }
     
-    const spanToggler = (id, price) => {
+    const spanToggler = (id, price, parent) => {
+        const total = parent.querySelector('.grid__item-total span'),
+              imgs = [...parent.querySelectorAll('img')],
+              btns = [...parent.querySelectorAll('.grid__item-btn')],
+              titles = [...parent.querySelectorAll('h4')];
+
         imgs.forEach(img => {
             img.style.display = id == img.dataset.id? '' : 'none';
         });
@@ -105,6 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.remove('active');
         });
     };
+
+    gridItems.forEach(item => {
+        gridItemGet(item);
+      });
 
     console.log(routerBtns);
 

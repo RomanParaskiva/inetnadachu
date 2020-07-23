@@ -1016,8 +1016,7 @@ p {
   gap: 0px 0px;
   grid-template-areas: "router router antenn antenn" "modem modem sim sim" "pigtail pigtail cronsh cronsh" "montage sum sum sum";
  width: 100%;
-}
-
+} 
 .router { grid-area: router; }
 
 .antenn { grid-area: antenn; }
@@ -1032,7 +1031,30 @@ p {
 
 .montage { grid-area: montage; }
 
-.sum { grid-area: sum; }
+@media (max-width:768px) {
+  .grid__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "router router router router" "antenn antenn antenn antenn" "modem modem modem modem" "sim sim sim sim" "pigtail pigtail pigtail pigtail" "cronsh cronsh cronsh cronsh" "montage montage montage montage";
+    width: 100%;
+  }
+  
+  .router { grid-area: router; }
+  
+  .antenn { grid-area: antenn; }
+  
+  .modem { grid-area: modem; }
+  
+  .sim { grid-area: sim; }
+  
+  .pigtail { grid-area: pigtail; }
+  
+  .cronsh { grid-area: cronsh; }
+  
+  .montage { grid-area: montage; }
+}
 
 .grid__item {
  display: flex;
@@ -1043,6 +1065,7 @@ p {
   min-height: 170px;
   border: 1px solid #e5ebed;
   padding: 2rem 1rem;
+  cursor: pointer;
   transition: all .3s;
 }
 
@@ -1091,6 +1114,12 @@ p {
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
+  padding-left: 1rem;
+}
+
+.grid__item-subtitle {
+  font-size: 18px;
+  font-weight: 500;
 }
 
 
