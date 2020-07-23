@@ -1122,6 +1122,14 @@ p {
   font-weight: 500;
 }
 
+.calc__sum {
+  opacity: .9;
+    font-weight: 600;
+    font-size: 39px;
+    letter-spacing: .23px;
+    line-height: 50px;
+}
+
 
 /* tarifs */
 .fdb-box {

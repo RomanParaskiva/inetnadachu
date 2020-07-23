@@ -76,9 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /// calculator 
 
-    const gridItems = [...document.querySelectorAll('.grid__item')];
-
-          
+    const gridItems = [...document.querySelectorAll('.grid__item')];   
 
     const gridItemGet = (parent) => {
         const btns = [...parent.querySelectorAll('.grid__item-btn')];
@@ -89,10 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       const t = e.target;
                       spanToggler(t.dataset.id, t.dataset.price, parent);
                       t.classList.add('active');
+                      calcSum();
                     });
                 });
               }
-    }
+    };
     
     const spanToggler = (id, price, parent) => {
         const total = parent.querySelector('.grid__item-total span'),
@@ -116,6 +115,21 @@ document.addEventListener('DOMContentLoaded', () => {
         gridItemGet(item);
       });
 
+
+      const calcSum = () => {
+          const gridItemTotals = [...document.querySelectorAll('.grid__item-total span')],
+                calcSum = document.querySelector('.calc__sum');
+            let temp = 0;
+
+                gridItemTotals.forEach(item => {
+                    if(typeof(+item) == 'number'){
+                        temp += +item.textContent;
+                    }
+                });
+                calcSum.textContent = temp;
+      };
+
+      calcSum();
 
 
 });
