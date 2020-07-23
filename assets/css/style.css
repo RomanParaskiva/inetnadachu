@@ -1012,9 +1012,9 @@ p {
 .grid__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
-  grid-template-areas: "router router antenn antenn" "modem modem sim sim" "pigtail pigtail cronsh cronsh" "montage sum sum sum";
+  grid-template-areas: "router router antenn antenn" "modem modem sim sim" "pigtail cronsh montage montage" ;
  width: 100%;
 } 
 .router { grid-area: router; }

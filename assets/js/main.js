@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gridItemGet(item);
       });
 
-    console.log(routerBtns);
 
 
 });
